@@ -1,10 +1,10 @@
 #include "main.h"
-
 /**
- * main -prints _putchar
- *
- * return: always 0 (Success)
+ * main - Check description
+ * Description: It prints the word Holberton, followed by a new line.
+ * Return: 0.
  */
+
 int main(void)
 {
 	_putchar('_');
