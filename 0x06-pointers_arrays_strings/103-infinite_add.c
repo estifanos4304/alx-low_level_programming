@@ -1,52 +1,68 @@
-#include "main.h"                                                                                                                       
-                                                                                                                                        
-char *add_strings(char *n1, char *n2, char *r, int r_index);                                                                            
-char *infinite_add(char *n1, char *n2, char *r, int size_r);                                                                            
-                                                                                                                                        
-/**                                                                                                                                     
- * add_strings - Adds the numbers stored in two strings.                                                                                
- * @n1: The string containing the first number to be added.                                                                             
- * @n2: The string containing the second number to be added.                                                                            
- * @r: The buffer to store the result.                                                                                                  
- * @r_index: The current index of the buffer.                                                                                           
- *                                                                                                                                      
- * Return: If r can store the sum - a pointer to the result.                                                                            
- *         If r cannot store the sum - 0.                                                                                               
- */                                                                                                                                     
-char *add_strings(char *n1, char *n2, char *r, int r_index)                                                                             
-{
-	int num, tens = 0;
+#include "main.h"
 
-	for (; *n1 && *n2; n1--, n2--, r_index--)
-	{
-		num = (*n1 - '0') +num += tens;                                                                                                            
-                *(r + r_index) = (num % 10) + '0';                                                                                      
-                tens = num / 10;                                                                                                        
-        }                                                                                                                               
-                                                                                                                                        
-        for (; *n1; n1--, r_index--)                                                                                                    
-        {                                                                                                                               
-                num = (*n1 - '0') + tens;                                                                                               
-                *(r + r_index) = (num % 10) + '0';                                                                                      
-                tens = num / 10;                                                                                                        
-        }                                                                                                                               
-                                                                                                                                        
-        for (; *n2; n2--, r_index--)                                                                                                    
-        {                                                                                                                               
-                num = (*n2 - '0') + tens;                                                                                               
-                *(r + r_index) = (num % 10) + '0';                                                                                      
-                tens = num / 10;                                                                                                        
-        }                                                                                                                               
-                                                                                                                                        
-        if (tens && r_index >= 0)                                                                                                       
-        {                                                                                                                               
-                *(r + r_index) = (tens % 10) + '0';                                                                                     
-                return (r + r_index);                                                                                                   
-        }                                                                                                                               
-                                                                                                                                        
-        else if (tens && r_index < 0)                                                                                                   
-                return (0);                                                                                                             
-                                                                                                                                        
-        return (r + r_index + 1);                                                                                                       
+/**
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
+ *
+ * Return: integer length of string
+ */
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (*s++)
+		i++;
+	return (i);
 }
 
+/**
+ * rev_string - reverses a string
+ * @s: the string to reverse
+ *
+ * Return: void
+ */
+char *rev_string(char *s)
+{
+	int l = _strlen(s), i = 0;
+	char t;
+
+	for (i = 0; i < l / 2; i++)
+	{
+		t = s[l - i - 1];
+		s[l - i - 1] = s[i];
+		s[i] = t;
+	}
+	return (s);
+}
+
+/**
+ * infinite_add - adds arbitrarily long string of digits
+ * @n1: the first digit string
+ * @n2: the second digit string
+ * @r: the result buffer
+ * @size_r: the size of result buffer
+ *
+ * Return: char pointer to buffer
+ */
+char *infinite_add(char *n1, char *n2, char *r, int size_r)
+{
+	int l1 = _strlen(n1), l2 = _strlen(n2), i = 0, a, b, c = 0;
+
+	for (l1--, l2--, size_r--; l1 >= 0 || l2 >= 0 || c; l1--, l2--, i++)
+	{
+		if (i >= size_r)
+			return (0);
+		a = 0;
+		b = 0;
+		if (l1 >= 0)
+			a = n1[l1] - '0';
+		if (l2 >= 0)
+			b = n2[l2] - '0';
+		a = a + b + c;
+		c = a / 10;
+		a %= 10;
+		r[i] = a + '0';
+	}
+	r[i] = '\0';
+	return (rev_string(r));
+}
