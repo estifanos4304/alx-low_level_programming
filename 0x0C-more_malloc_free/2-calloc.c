@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "holberton.h"
+#include "main.h"
 
 /**
  * _calloc - function that allocates memory for an array, using malloc
@@ -35,9 +35,9 @@ char *_memset(char *s, char b, unsigned int n)
 
 	while (i < n)
 	{
-
 		*(s + i) = b;
 		i += 1;
 	}
 	return (s);
 }
+
