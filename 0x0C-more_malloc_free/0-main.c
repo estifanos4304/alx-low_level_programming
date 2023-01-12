@@ -8,16 +8,14 @@
  *
  * Return: Always 0.
  */
-
 int main(void)
-
 {
 	char *c;
 	int *i;
 	float *f;
 	double *d;
 
-	= malloc_checked(sizeof(char) * 1024);
+	c = malloc_checked(sizeof(char) * 1024);
 	printf("%p\n", (void *)c);
 	i = malloc_checked(sizeof(int) * 402);
 	printf("%p\n", (void *)i);
@@ -30,5 +28,4 @@ int main(void)
 	free(f);
 	free(d);
 	return (0);
-
 }
