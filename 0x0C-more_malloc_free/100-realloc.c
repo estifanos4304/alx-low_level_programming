@@ -1,12 +1,12 @@
-#include "holberton.h"
+#include "main.h"
 #include <stdlib.h>
 
 /**
- *_realloc - function reallocates a memory block using malloc and free
- *@ptr: pointer to the memory previously allocated
- *@old_size: size in bytes
- *@new_size: size in bytes
- *Return: pointer
+ * _realloc - function reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previously allocated
+ * @old_size: size in bytes
+ * @new_size: size in bytes
+ * Return: pointer
  */
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
@@ -64,3 +64,4 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 	}
 	return (dest);
 }
+
