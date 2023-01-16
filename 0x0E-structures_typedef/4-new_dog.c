@@ -11,11 +11,11 @@
 dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *new_dog;
-
+	/* reserving memory to struct*/
 	new_dog = malloc(sizeof(dog_t));
 	if (new_dog == NULL)
 		return (NULL);
-
+	/* Cpunting name pointer*/
 	if (name == NULL)
 	{
 		free(new_dog);
