@@ -2,15 +2,18 @@
 #include <stdlib.h>
 
 /**
- * main - prints opcode of own main function
- * @argc: argument count
- * @argv: array of arguments
- * Return: 1 or 2 on fail, 0 on success
+ * main - program that prints the opcodes of its own main function
+ *
+ * @argc: count of args
+ * @argv: array of args
+ *
+ * Return: int
  */
-int main(int argc, char *argv[])
+
+int main(int argc, char **argv)
 {
-	int bytes, i;
-	unsigned char *func_ptr;
+	int i, bytes;
+	char *addr;
 
 	if (argc != 2)
 	{
@@ -23,14 +26,10 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	func_ptr = (unsigned char *)main;
-	i = 0;
-	if (bytes > 0)
-	{
-		while (i < (bytes - 1))
-			printf("%02hhx ", func_ptr[i++]);
-		printf("%hhx\n", func_ptr[i]);
-	}
+	addr = (char *)main;
+	for (i = 0; i < bytes - 1; i++)
+		printf("%02hhx ", addr[i]);
+	printf("%02hhx\n", addr[i]);
 	return (0);
 }
 
