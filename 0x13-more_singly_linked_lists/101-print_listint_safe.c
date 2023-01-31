@@ -2,55 +2,33 @@
 #include <stdio.h>
 
 /**
- * print_listint_safe - function that prints a listint_t linked list.
- * @head: pointer to head of a list.
- *
- * Return: Length of list (INT)
+ * print_listint_safe - A function that prints the elementsin a  list
+ * @head: A pointer to listint_t structure
+ * Return: The number of nodes. Exits with 98 on failure
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *slow_p = head, *fast_p = head;
-	size_t ele = 0;
-	int is_loop = 0;
+	size_t nodes = 0;
+	const listint_t *one = head, *two = head;
 
-	while (slow_p && fast_p && fast_p->next)
-	{
-		if (!(fast_p->next->next))
-			break;
-		slow_p = slow_p->next;
-		fast_p = fast_p->next->next;
-		if (slow_p == fast_p)
-		{
-			slow_p = slow_p->next;
-			is_loop = 1;
-			break;
-		}
-	}
+	if (head == NULL)
+		exit(98);
 
-	if (!is_loop)
+	while (one && two && two->next && head)
 	{
-		while (head)
+		one = one->next;
+		two = two->next->next;
+		if (one == two)
 		{
-			ele++;
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
-		}
-		return (ele);
-	}
-
-	while (head)
-	{
-		ele++;
-		if (head == slow_p)
-		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			printf("-> [%p] %d\n", (void *)head, head->next->n);
+			printf("-> [%p] %d\n", (void *)head, head->n);
 			exit(98);
 		}
 
 		printf("[%p] %d\n", (void *)head, head->n);
 		head = head->next;
+		nodes++;
 	}
-	return (0);
+	head = NULL;
+	return (nodes);
 }
 
